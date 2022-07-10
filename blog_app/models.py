@@ -1,4 +1,4 @@
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, DATETIME, BigInteger
+from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, DATETIME, BigInteger, DateTime
 from sqlalchemy.orm import relationship
 
 from .database import Base
@@ -13,8 +13,8 @@ class User(Base):
     email = Column(String(100), unique=True, index=True)
     hashed_password = Column(String(100))
     mobile = Column(String(15), nullable=False)
-    registered_at = Column(DATETIME, nullable=False)
-    last_login = Column(DATETIME)
+    registered_at = Column(DateTime, nullable=False)
+    last_login = Column(DateTime)
     intro = Column(String(500), nullable=False)
     profile = Column(String(500), nullable=False)
     is_active = Column(Boolean, default=True)
@@ -30,8 +30,8 @@ class Post(Base):
     content = Column(String(500), index=True)
     summary = Column(String(50), index=True)
     is_published = Column(Boolean, default=False)
-    created_at = Column(DATETIME, nullable=False)
-    updated_at = Column(DATETIME)
+    created_at = Column(DateTime, nullable=False)
+    updated_at = Column(DateTime)
     author_id = Column(Integer, ForeignKey("users.id"))
 
     author = relationship("User", back_populates="posts")
